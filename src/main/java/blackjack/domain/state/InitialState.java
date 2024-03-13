@@ -3,14 +3,17 @@ package blackjack.domain.state;
 import blackjack.domain.card.Deck;
 
 public class InitialState extends RunningState {
+    private static final int INITIAL_DRAW_COUNT = 2;
+
     public InitialState() {
         super(new Hand());
     }
 
     @Override
     public State draw(Deck deck) {
-        hand = hand.add(deck.draw());
-        hand = hand.add(deck.draw());
+        for (int i = 0; i < INITIAL_DRAW_COUNT; i++) {
+            hand = hand.add(deck.draw());
+        }
 
         if (hand.isBlackjack()) {
             return new BlackjackState(hand);

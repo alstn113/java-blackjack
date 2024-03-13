@@ -1,6 +1,5 @@
 package blackjack.domain.state;
 
-import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
 
 public abstract class FinishedState extends State {

@@ -39,4 +39,25 @@ public class OutputView {
                 .map(Card::getName)
                 .collect(Collectors.joining(", "));
     }
+
+    public void printDealerHitMessage() {
+        System.out.println();
+        System.out.printf("%s는 16이하라 한장의 카드를 더 받았습니다.%n", DEALER_NAME);
+    }
+
+    public void printAllCardsWithScore(Dealer dealer, List<Player> players) {
+        System.out.println();
+        System.out.println(buildCardsWithScoreMessage(DEALER_NAME, dealer.getCards(), dealer.calculateScore()));
+        for (Player player : players) {
+            System.out.println(
+                    buildCardsWithScoreMessage(player.getName(), player.getCards(), player.calculateScore()));
+        }
+    }
+
+    private String buildCardsWithScoreMessage(String name, List<Card> cards, int score) {
+        return String.format("%s카드: %s - 결과: %d",
+                name,
+                buildCardsMessage(cards),
+                score);
+    }
 }

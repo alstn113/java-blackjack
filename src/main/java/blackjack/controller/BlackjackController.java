@@ -23,6 +23,8 @@ public class BlackjackController {
 
         initialDraw(players, dealer, deck);
         playersTurn(players, deck);
+        dealerTurn(dealer, deck);
+        printResult(dealer, players);
     }
 
     private void initialDraw(Players players, Dealer dealer, Deck deck) {
@@ -39,9 +41,10 @@ public class BlackjackController {
     private void playerTurn(Player player, Deck deck) {
         while (player.canDraw()) {
             playerAction(player, deck);
+
+            outputView.printCards(player.getName(), player.getCards());
         }
 
-        outputView.printCards(player.getName(), player.getCards());
     }
 
     private void playerAction(Player player, Deck deck) {
@@ -53,5 +56,17 @@ public class BlackjackController {
         }
 
         player.stay();
+    }
+
+    private void dealerTurn(Dealer dealer, Deck deck) {
+        while (dealer.canDraw()) {
+            dealer.draw(deck);
+
+            outputView.printDealerHitMessage();
+        }
+    }
+
+    private void printResult(Dealer dealer, Players players) {
+        outputView.printAllCardsWithScore(dealer, players.getValue());
     }
 }
