@@ -1,24 +1,26 @@
 package blackjack.domain.state;
 
-import blackjack.domain.card.Card;
+import blackjack.domain.card.Deck;
 
-public class InitialState extends State {
-    public InitialState(Hand hand) {
-        super(hand);
+public class InitialState extends RunningState {
+    public InitialState() {
+        super(new Hand());
     }
 
     @Override
-    public State draw(Card cad) {
-        return null;
+    public State draw(Deck deck) {
+        hand = hand.add(deck.draw());
+        hand = hand.add(deck.draw());
+
+        if (hand.isBlackjack()) {
+            return new BlackjackState(hand);
+        }
+
+        return new HitState(hand);
     }
 
     @Override
     public State stay() {
-        return null;
-    }
-
-    @Override
-    public boolean isFinished() {
-        return false;
+        throw new UnsupportedOperationException("초기 상태에서는 stay 할 수 없습니다.");
     }
 }

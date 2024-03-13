@@ -1,6 +1,8 @@
 package blackjack.domain.card;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,6 +31,10 @@ public class Card {
 
     private static String toKey(CardRank cardRank, CardShape cardShape) {
         return cardRank.getRank() + cardShape.getShape();
+    }
+
+    public static List<Card> getCards() {
+        return new ArrayList<>(CARD_POOL.values());
     }
 
     public CardRank getCardRank() {

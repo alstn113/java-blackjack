@@ -1,18 +1,26 @@
 package blackjack.domain;
 
-import blackjack.domain.state.Hand;
+import blackjack.domain.card.Card;
 import blackjack.domain.state.InitialState;
+import java.util.List;
 
 public class Dealer extends Participant {
-    private static final String DEALER_NAME = "딜러";
-    private static final int DEALER_DRAW_THRESHOLD = 16;
+    private static final String DEFAULT_NAME = "딜러";
+    private static final int STAND_BOUND = 17;
+    private static final int HIDDEN_CARD_COUNT = 1;
 
-    public Dealer(Hand hand) {
-        super(new Name(DEALER_NAME), new InitialState(hand));
+    public Dealer() {
+        super(new Name(DEFAULT_NAME), new InitialState());
     }
 
     @Override
-    public boolean isFinished() {
-        return super.isFinished();
+    public boolean canDraw() {
+        return !isFinished() && calculateScore() < STAND_BOUND;
+    }
+
+    public List<Card> getVisibleCards() {
+        List<Card> cards = getCards();
+
+        return cards.subList(HIDDEN_CARD_COUNT, cards.size());
     }
 }
