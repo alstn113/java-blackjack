@@ -24,4 +24,8 @@ public abstract class State {
     public List<Card> getCards() {
         return hand.getCards();
     }
+
+    public boolean isBlackjack() {
+        return hand.isBlackjack();
+    }
 }

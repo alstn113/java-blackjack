@@ -2,6 +2,7 @@ package blackjack.domain;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Deck;
+import blackjack.domain.state.Hand;
 import blackjack.domain.state.State;
 import java.util.List;
 
@@ -37,6 +38,10 @@ public abstract class Participant {
 
     public int calculateScore() {
         return state.calculateScore();
+    }
+
+    public boolean isBlackjack() {
+        return state.isBlackjack();
     }
 
     public List<Card> getCards() {

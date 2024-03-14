@@ -15,10 +15,6 @@ public class HitState extends RunningState {
             return new BustState(hand);
         }
 
-        if (hand.calculateScore() == 21) {
-            return new StandState(hand);
-        }
-
         return new HitState(hand);
     }
 
